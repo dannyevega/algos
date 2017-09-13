@@ -151,7 +151,7 @@ function fibonacci(num){
 	return fibonacci[n];
 }
 
-// using memoization
+// using memoization with IIFE
 var fibonacci = (function(){
 	let memo = {};
 	function helper(n){
@@ -165,6 +165,24 @@ var fibonacci = (function(){
 				value = fibonacci(n - 2) + fibonacci(n - 1);
 				memo[n] = value;
 			}
+		}
+		return value;
+	}
+	return helper;
+})();
+
+var fibonacci = (function(){
+	let memo = {
+		0: 0,
+		1: 1
+	};
+	function helper(n){
+		let value;
+		if(n in memo){
+			value = memo[n];
+		} else {
+			value = fibonacci(n - 2) + fibonacci(n - 1);
+			memo[n] = value;
 		}
 		return value;
 	}
@@ -190,8 +208,25 @@ function fibonacci(num){
 	return fibonacci;
 }
 
-
-
+/*
+Implement a function that flattens a nested array.
+flatten([1,[2],[3, [[4]]]]);
+=> [1,2,3,4]
+*/
+function flatten(arr){
+	let result = [];
+	function helper(currentObj){
+		for(let i = 0; i < currentObj.length; i++){
+			if(typeof currentObj[i] === "number"){
+				result.push(currentObj[i]);
+			} else {
+				helper(currentObj[i]);
+			}
+		}
+		return result;
+	}
+	return helper(arr);
+}
 
 
 
