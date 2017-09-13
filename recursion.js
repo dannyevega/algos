@@ -130,9 +130,65 @@ function recursiveReverse(arr){
 	return result;
 }
 
+/*
+Write a function that outputs the nth Fibonnaci number. A number in this sequence is found by adding up the two numbers before it.
+Fibonnaci's sequence:
+input    0 1 2 3 4 5 6  7  8  9 ...
+output   0 1 1 2 3 5 8 13 21 34 ...
+What is the time complexity? Can you think of optimizing your solution? (Hint: look up dynamic programming)
+*/
+function fibonacci(num){
+	var fibonacci = [0,1];
+	function helper(index){
+		if(index > num){
+			return;
+		} else {
+			fibonacci[index] = fibonacci[index - 2] + fibonacci[index - 1];
+			helper(index + 1);
+		}
+	}
+	helper(2);
+	return fibonacci[n];
+}
 
+// using memoization
+var fibonacci = (function(){
+	let memo = {};
+	function helper(n){
+		let value;
+		if(n in memo){
+			value = memo[n];
+		} else {
+			if(n === 0 || n === 1){
+				value = n;
+			} else {
+				value = fibonacci(n - 2) + fibonacci(n - 1);
+				memo[n] = value;
+			}
+		}
+		return value;
+	}
+	return helper;
+})();
 
-
+// return all nums before passed in num
+// input: 5
+// output: [0,1,1,2,3]
+function fibonacci(num){
+	var fibonacci = [0,1];
+	if(num === 0) { return []; }
+	function helper(index){
+		if(index > num){
+			return;
+		} else {
+			fibonacci[index] = fibonacci[index - 2] + fibonacci[index - 1];
+			helper(index + 1);
+		}
+	}
+	helper(2);
+	fibonacci.splice(fibonacci.length - 1);
+	return fibonacci;
+}
 
 
 
