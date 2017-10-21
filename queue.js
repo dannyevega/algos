@@ -8,32 +8,38 @@ function Queue(capacity) {
 Queue.prototype.enqueue = function(value) {
 	if(this.count() < this.capacity){
 		this.storage[this.tail] = value;
+		this.tail++;
+		return this.count();
 	} else {
 		return "Max capacity already reached. Remove element before adding a new one.";
 	}
-	this.tail++;
 };
-// Time complexity:
+// Time complexity: O(1)
 
 Queue.prototype.dequeue = function() {
+	if(this.head === this.tail){
+		return "Queue is empty.";
+	}
 	let result = this.storage[this.head];
 	delete this.storage[this.head];
-	this.tail--;
 	if(this.head < this.tail){
 		this.head++;
 	}
 	return result;
 };
-// Time complexity:
+// Time complexity: O(1)
 
 Queue.prototype.peek = function() {
 	return this.storage[this.tail];
 };
+// Time complexity: O(1)
 
 Queue.prototype.count = function() {
 	return this.tail - this.head;
 };
-// Time complexity:
+// Time complexity: O(1)
+
+q = new Queue(3);
 
 /*
 *** Exercises:
@@ -61,20 +67,3 @@ Queue.prototype.dequeue = function(){
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

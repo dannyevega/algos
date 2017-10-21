@@ -118,6 +118,16 @@ function recursiveReverse(arr){
 }
 
 function recursiveReverse(arr){
+	if(arr.length === 0){
+		return;
+	}
+	var element = arr.shift();
+	recursiveReverse(arr);
+	arr.push(element);
+	return arr;
+}
+
+function recursiveReverse(arr){
 	let result = [];
 	function reverseItems(orderedArr){
 		if(arr.length > 0){
