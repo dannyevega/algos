@@ -34,6 +34,32 @@ Stack.prototype.size = function(){
 
 stack = new Stack(3);
 
+// Queue with two stacks created above
+function QueueWithTwoStacks(){
+	this.inStack = new Stack();
+	this.outStack = new Stack();
+}
+
+QueueWithTwoStacks.prototype.enqueue = function(value){
+	this.inStack.push(value);
+}
+
+QueueWithTwoStacks.prototype.transferStacks = function(){
+	while(this.inStack.size() > 0){
+		this.outStack.push(this.inStack.pop());
+	}
+}
+
+QueueWithTwoStacks.prototype.dequeue = function(){
+	if(this.outStack.size() === 0){
+		this.transferStacks();
+	}
+	var el = this.outStack.pop();
+	while(this.outStack.size() > 0){
+		this.inStack.push(this.outStack.pop());
+	}
+	return el;
+}
 
 
 // Getting wild
