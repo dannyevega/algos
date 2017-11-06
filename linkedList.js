@@ -1,6 +1,7 @@
 function Node(value){
 	this.value = value;
 	this.next = null;
+	this.previous = null;
 }
 
 function LinkedList(headValue){
@@ -19,6 +20,7 @@ LinkedList.prototype.insertNode = function(value){
 		current = current.next;
 	}
 	this.tail = node;
+	node.previous = current;
 	current.next = node;
 	this.length++;
 	return node;
@@ -46,3 +48,51 @@ LinkedList.prototype.print = function(){
 	}
 	return result.slice(0, - 1);
 }
+
+// Create a function to insert new node associated with value passed in after a position
+LinkedList.prototype.insertNodeAt = function(position, value){
+	let node = new Node(value), current = this.head, previous = null, count = 1;
+	while(count < position){
+		previous = current;
+		current = current.next;
+		count++;
+	}
+	previous.next = node;
+	node.previous = previous;
+	node.next = current;
+	current.previous = node;
+	this.length++
+	return node;
+}
+
+LinkedList.prototype.removeNode = function(){
+	
+}
+
+// Create a function to remove node after a position
+LinkedList.prototype.removeNodeAt = function(position){
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
