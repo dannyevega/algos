@@ -26,6 +26,31 @@ LinkedList.prototype.insertNode = function(value){
 	return node;
 }
 
+// Create a function to insert new node associated with value passed in after a position
+LinkedList.prototype.insertNodeAt = function(position, value){
+	let node = new Node(value), current = this.head, previous = null, count = 1;
+	while(count < position){
+		previous = current;
+		current = current.next;
+		count++;
+	}
+	previous.next = node;
+	node.previous = previous;
+	node.next = current;
+	current.previous = node;
+	this.length++
+	return node;
+}
+
+LinkedList.prototype.insertHead = function(value){
+	let node = new Node(value), current = this.head;
+	this.head = node;
+	node.next = current;
+	current.previous = node;
+	this.length++;
+	return node;
+}
+
 // invoke callback function to print the value of each node
 LinkedList.prototype.forEach = function(callback){
 	let current = this.head;
@@ -49,50 +74,48 @@ LinkedList.prototype.print = function(){
 	return result.slice(0, - 1);
 }
 
-// Create a function to insert new node associated with value passed in after a position
-LinkedList.prototype.insertNodeAt = function(position, value){
-	let node = new Node(value), current = this.head, previous = null, count = 1;
+LinkedList.prototype.removeNode = function(){
+	let tail = this.tail;
+	this.tail = tail.previous;
+	this.tail.next = null;
+	this.length--;
+	return tail;
+}
+
+// Create a function to remove node after a position
+LinkedList.prototype.removeNodeAt = function(position){
+	let current = this.head, previous = null, count = 1;
 	while(count < position){
 		previous = current;
 		current = current.next;
 		count++;
 	}
-	previous.next = node;
-	node.previous = previous;
-	node.next = current;
-	current.previous = node;
-	this.length++
-	return node;
+	previous.next = current.next;
+	current.next.previous = previous;
+	this.length--;
 }
 
-LinkedList.prototype.removeNode = function(){
-	
+LinkedList.prototype.removeHead = function(){
+	let current = this.head;
+	this.head = current.next;
+	current.next.previous = null;
+	this.length--;
+	return current;
 }
 
-// Create a function to remove node after a position
-LinkedList.prototype.removeNodeAt = function(position){
-
+LinkedList.prototype.findNode = function(value){
+	let current = this.head;
+	while(current){
+		if(current.value === value){
+			return current;
+		}
+		current = current.next;
+	}
+	return "Node not found."
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+let linky = new LinkedList(3);
+linky.insertNode(5);
+linky.insertNode(17);
+linky.insertNode(38);
+linky.insertNodeAt(3, 9);
