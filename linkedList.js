@@ -119,3 +119,16 @@ linky.insertNode(5);
 linky.insertNode(17);
 linky.insertNode(38);
 linky.insertNodeAt(3, 9);
+
+var a = [1, 2, 3, 4];
+var b = [3, 4, 5];
+var c = [3, 4, 5];
+var set = {
+	add: function(item) {
+		this[item] = item;
+	}
+};
+set.add(a);
+set.add(b);
+set.add(c);
+
