@@ -1,4 +1,4 @@
-function BST(value){
+	function BST(value){
 	if(value === undefined){
 		throw new Error("Must initialize with a head value, fam.");
 		return;
@@ -115,7 +115,7 @@ BST.prototype.deleteMinNode = function(parent){
 		if(parent){
 			parent.left = null;
 		} else {
-			this.head = null;
+			this.value = null;
 		}
 	}
 	// Case: If minimum node has a right tree
